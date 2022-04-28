@@ -1,5 +1,5 @@
-# para
-P
+### 
+
 
 @Type something…
 
@@ -65,772 +65,888 @@ P
 
 
 
+Kill code
 
-Week 9
-Q1
-int compare(int a, int b) {
-  if(a>b) return 1;
-  	else if(a<b) return -1;
-  		else return 0;
-}
-
-Q2
-void swap(int *a,int *b){
-  		int n=*a;
- 		*a=*b;
-  		*b=n;
-
-Q3
-void sort(int array[], int n){
-	int y;
-  	 for(int i=0;i<n;i++){
-        for(int j=0;j<n;j++){
-            if(array[i]<array[j]){
-                    y=array[i];
-                    array[i]=array[j];
-                    array[j]=y;
-            }
-        }
-    }
-}
-
-
-Week10
-Q1
-int elementAt(int *pointer, int n)
-{
-  return*(pointer+n-1);
-}
-Q2
-int between(int *a, int *b)
-{
-    int sum=0;
-    int *i;
-    for(a;a<b;a++) sum=sum+*a;
-    return sum;
-}
-
-Q3
-int merger(int *a, int *b, int *c)
-{
-  int x[10]={0};
-  for(int i=0;i<5;i++) x[i]=*(a+i);
-  int j=5;
-  for(int k=0;k<5;k++){
-    //printf("%d ",x[j]);
-   x[j]=*(b+k);
-  //printf("%d ",x[j]);
-    j=j+1;
-  }
-  int k=0;
-  for(int i=0;i<10;i++){
-    for(int j=i+1;j<10;j++){
-      int temp;
-      if(x[i]>x[j]){
-        temp=x[i];
-        x[i]=x[j];
-        x[j]=temp;
-      }
-    }
-    *(c+k)=x[i];
-    //printf("%d \n",x[i]);
-    k++;
-  }
-}
-Week12
-Q1
-char *mystrcat(char *dest, char *src)
-{
-       strcat(dest,src);
-        return dest;
-}
-char *mystrncat(char *dest, char *src, int n)
-{
-		strncat(dest,src,n);
-        return dest;
-}
-
-
-
-
-Q2
-char *trim(char *dest)
-{
-    int count=0;
-    char *first=dest;
-    char *last=dest+strlen(dest)-1;
-    while(*(first)=='\n'||*(first)=='\t'||*(first)==' ') first++;
-    while(*(last)=='\n'||*(last)=='\t'||*(last)==' ') last--;
-    for(first;first<=last;first++){
-        *(dest+count)=*first;
-        count++;
-    }
-    *(dest+count)='\0';
-    return dest;
-}
-Q3
-#include<string.h>
-char *replace(char *source, char *pattern, char *replacement)
-{
-    if(strstr(source,pattern)==NULL) return source;
-    char *begin=strstr(source,pattern);
-    char *end=begin+strlen(pattern);
-    char temp[10000];
-    int count =0;
-    for(end;end<source+strlen(source);end++) {
-        temp[count]=*end;
-        count++;
-    }
-    for(int i=0;i<strlen(replacement);i++){
-        *(begin+i)=*(replacement+i);
-    }
-    for(int i=0;i<strlen(temp);i++){
-        *(begin+strlen(replacement)+i)=temp[i];
-    }
-    *(begin+strlen(temp)+strlen(replacement))='\0';
-    return source;
-}
-char *replaceAll(char *source, char *pattern, char *replacement)
-{
-    if(strstr(source,pattern)==NULL) return source;
-    int times=0,length=strlen(source);
-    while(strstr(source,pattern)!=NULL){
-    char *begin=strstr(source,pattern);
-    char *end=begin+strlen(pattern);
-    char temp[10000]={'0'};
-    int count =0;
-    for(end;end<source+strlen(source);end++){
-        temp[count]=*end;
-        count++;
-    }
-    for(int i=0;i<strlen(replacement);i++){
-        *(begin+i)=*(replacement+i);
-    }
-    for(int i=0;i<strlen(temp);i++){
-        *(begin+strlen(replacement)+i)=temp[i];
-        }
-    if(strlen(replacement)<strlen(pattern)) *(source+strlen(source)-1)='\0';
-    times++;
-    }
-    *(source+times*(strlen(replacement)-strlen(pattern))+length)='\0';
-    return source;
-}
-Q4
-#include <stdio.h>
-#include<string.h>
+Week 1
+#include <iostream>
+using namespace std;
+ 
 int main()
-{
-  char str[10000];
-  gets(str);
-  for(int i=strlen(str);i>=0;i--)
-  {
-    if(str[i]==' ' ){
-      for(int j=i+1;j<strlen(str);j++){
-         if(str[j]!=' '){
-            printf("%c",str[j]);
-         }else{
-            break;
-         }
-      }
-    printf(" ");
-    }
-  }
-  for(int i=0;i<strlen(str);i++){
-    if(str[i]!=' ')
-    printf("%c",str[i]);
-    else
-        break;
-  }
-  return 0;
-}
-
-#include <stdio.h>
-#include <string.h>
-#define MAX_SIZE 100 // Maximum string size
-
-int main()
-{
-    char str[100], reverse[100];
-    int len, i, index, wordStart, wordEnd;
-
-    gets(str);
-
-    len   = strlen(str);
-    index = 0;
-
-    // Start checking of words from the end of string
-    wordStart = len - 1;
-    wordEnd   = len - 1;
-
-    while(wordStart > 0)
-    {
-        // If a word is found
-        if(str[wordStart] == ' ')
-        {
-            // Add the word to the reverse string
-            i = wordStart + 1;
-            while(i <= wordEnd)
-            {
-                reverse[index] = str[i];
-
-                i++;
-                index++;
-            }
-            reverse[index++] = ' ';
-
-            wordEnd = wordStart - 1;
-        }
-
-        wordStart--;
-    }
-
-    // Finally add the last word
-    for(i=0; i<=wordEnd; i++)
-    {
-        reverse[index] = str[i];
-        index++;
-    }
-
-    // Add NULL character at the end of reverse string
-    reverse[index] = '\0';
-
-    printf("%s", reverse);
-
-    return 0;
-}
-
-
-Week14
-Q1
-#include<stdio.h>
-#include<string.h>
-int main(){
-    int n;
-    scanf("%d",&n);
-    char str[1000][51];
-    for(int i=0;i<n;i++) scanf("%s",*(str+i));
-    for(int i=0;i<n;i++){
-       for(int j=0;j<n;j++){
-        if(strcmp(str+i,str+j)<0){
-            char temp[51]={0};
-            strcpy(temp,str+i);
-            strcpy(str+i,str+j);
-            strcpy(str+j,temp);
-        }
-      }
-    }
-    for(int i=0;i<n;i++) printf("%s\n",*(str+i));
+{ 
+	float t, d, v;
+	cin>>t; cin>>d;
+    v = t / d;
+	cout<<v;
+	
 return 0;
 }
-Q2
-#include<stdio.h>
-#include<ctype.h>
-int main(){
-    char str[10000];
-    gets(str);
-    int sum=0;
-    for(int i=0;i<strlen(str);i++){
-        if(str[i]=='F') sum++;
-        else if(isdigit(str[i])){
-            int times=0;
-            char temp[10000]={0};
-            while(isdigit(str[i])){
-                temp[times]=str[i];
-                i++;
-                times++;
-               }
-               sum+=atoi(temp);
-            }
-        }
-        printf("%d",sum);
-    return 0;
-}
-Week15
-Q1
-#include<stdio.h>
-#include<string.h>
-#include<ctype.h>
-int main()
-{
-  char str[10000];
-  gets(str);
-  int num[10000];
-  int count=0,count1=0;
-  char sign[10000];
-  for(int i=0;i<strlen(str);i++){				//把字串中的數字或符號存到新陣列中
-        if(isdigit(str[i])){
-            char temp[10000]={0};
-            int times=0;
-            while(isdigit(str[i])){
-                temp[times]=str[i];
-                i++;
-                times++;
-            }
-            i--;
-            num[count]=atoi(temp);
-            count++;
-        }else if(str[i]=='+'|str[i]=='-'|str[i]=='*'|str[i]=='/'){
-        sign[count1]=str[i];
-        count1++;
-        }
-  }
-  int temp[10000];
-  int temp1[10000]={10001};
-  int count2=0,count3=0,count4=0,count5=0;//count2 存加減 count3 已經運算完的數字 count4
-    for(int i=0;i<strlen(sign);i++){       //運算乘和除
-         if(sign[i]!='*'&&sign[i]!='/') {
-                sign[count2]=sign[i];
-                count2++;
-        }else if(sign[i]=='*'){
-            num[i+1]=num[i]*num[i+1];
-            num[i]=0;
-            temp1[count3]=i;
-            count3++;
-        }else if(sign[i]=='/'){
-            num[i+1]=num[i]/num[i+1];
-            num[i]=0;
-            temp1[count3]=i;
-            count3++;
-        }
-    }
-    for(int i=0;i<count;i++){	//把還需要運算的數字存到新陣列裡
-      if(i==temp1[count4]){
-        count4++;
-      }else {
-          temp[count5]=num[i];
-          count5++;
-      }
-    }
-    for(int i=0;i<count2;i++){					//最後運算加和減
-        if(sign[i]=='+'){
-            temp[i+1]=temp[i]+temp[i+1];
-        }else if(sign[i]=='-'){
-            temp[i+1]=temp[i]-temp[i+1];
-        }
-    }
-   printf("%d",temp[count5-1]);
-    return 0;
-}
-Q2
-#include <stdio.h>
-#include <math.h>
-void myprintf(int,int ,int,int ,int ,int ,int (*) []    );
-int main(){
-    int n,m,times=0;
-    scanf("%d %d",&n,&m);
-    int temp[n][1000];
-    for(int i=0;i<n;i++){
-        for(int j=0;j<m;j++){
-            scanf("%d",&temp[i][j]);
-        }
-    }
-    int x=0,y=0;
-    int k=m*n;
-    n=n-1;
-   myprintf(k,x,y,times,n,m,temp);
-    return 0;
-}
-void myprintf(int k,int x,int y,int times,int n,int m,int (*a)[1000]){
-  if(times<k) {
-        for(int i=0;i<m;i++) {
-            times++;
-            if(times>k) break;
-            printf("%d ",a[y][x]);
-            x++;
-
-        }
-        x--;
-        y++;
-        m--;
-        for(int i=0;i<n;i++){
-            times++;
-            if(times>k) break;
-            printf("%d ",a[y][x]);
-            y++;
-        }
-        x--;
-        y--;
-        n--;
-        for(int i=0;i<m;i++){
-            times++;
-            if(times>k) break;
-            printf("%d ",a[y][x]);
-            x--;
-
-        }
-        y--;
-        x++;
-        m--;
-        for(int i=0;i<n;i++){
-            times++;
-            if(times>k) break;
-            printf("%d ",a[y][x]);
-            y--;
-        }
-        n--;
-        x++;
-        y++;
-    return myprintf(k,x,y,times,n,m,a);
-        }
-}
-Q3
-#include <stdio.h>
-int main()
-{
-  char board[20][20];
-  for(int i=0;i<19;i++){
-    for(int j=0;j<20;j++){
-        scanf("%c",&board[i][j]);
-    }
-  }
-   for(int i=0;i<19;i++){
-    for(int j=0;j<19;j++){
-        if(board[i][j]=='O'&&board[i+1][j]=='O'&&board[i+2][j]=='O'&&board[i-1][j]=='O'&&board[i-2][j]=='O'){
-            printf("White");
-            return 0;
-        }
-        if(board[i][j]=='O'&&board[i][j+1]=='O'&&board[i][j+2]=='O'&&board[i][j-1]=='O'&&board[i][j-2]=='O'){
-            printf("White");
-            return 0;
-        }
-        if(board[i][j]=='O'&&board[i+1][j+1]=='O'&&board[i+2][j+2]=='O'&&board[i-1][j-1]=='O'&&board[i-2][j-2]=='O'){
-            printf("White");
-            return 0;
-        }
-        if(board[i][j]=='O'&&board[i+1][j-1]=='O'&&board[i+2][j-2]=='O'&&board[i-1][j+1]=='O'&&board[i-2][j+2]=='O'){
-            printf("White");
-            return 0;
-        }
-         if(board[i][j]=='X'&&board[i+1][j]=='X'&&board[i+2][j]=='X'&&board[i-1][j]=='X'&&board[i-2][j]=='X'){
-            printf("Black");
-            return 0;
-        }
-        if(board[i][j]=='X'&&board[i][j+1]=='X'&&board[i][j+2]=='X'&&board[i][j-1]=='X'&&board[i][j-2]=='X'){
-            printf("Black");
-            return 0;
-        }
-        if(board[i][j]=='X'&&board[i+1][j+1]=='X'&&board[i+2][j+2]=='X'&&board[i-1][j-1]=='X'&&board[i-2][j-2]=='X'){
-            printf("Black");
-            return 0;
-        }
-        if(board[i][j]=='X'&&board[i+1][j-1]=='X'&&board[i+2][j-2]=='X'&&board[i-1][j+1]=='X'&&board[i-2][j+2]=='X'){
-            printf("Black");
-            return 0;
-        }
-    }
-  }
-  printf("No winner");
-  return 0;
-}
-Q4
-#include <stdio.h>
-#include<string.h>
-int main()
-{
-  char str[10000];
-  gets(str);
-  char compare[10000];
-  gets(compare);
-  int sumA=0,sumB=0;
-  for(int i=0;i<strlen(str);i++){
-    if(str[i]==compare[i]) sumA++;
-  }
-   for(int i=0;i<strlen(str);i++){
-        for(int j=0;j<strlen(str);j++){
-            if(compare[i]==str[j]&&i!=j) sumB++;
-        }
-  }
-  printf("%d %d",sumA,sumB);
-  return 0;
-}
-Week16
-Q1
-#include<stdio.h>
-#include<string.h>
-struct country{
-    double times;
-    char name[32];
-}temp[1000];
-int main(){
-    int times;
-    scanf("%d",&times);
-    char useless = getchar();
-    useless = getchar();
-    while(times>0){
-    int count=0,count1=0;
-    char str[32];
-    while(fgets(str, 32, stdin) != NULL && str[0] != '\n'){
-        if(str[strlen(str)-1] == '\n') str[strlen(str)-1] = '\0';
-        if(count==0){
-        temp[count].times=1;
-        strcpy(temp[count].name,str);
-        count++;
-        }else {
-        int repeat=0;
-        for(int i=0;i<count;i++){
-            if(strcmp(str,temp[i].name)==0) {
-                    repeat++;
-                    temp[i].times++;
-            }
-        }
-        if(repeat==0){
-        temp[count].times=1;
-        strcpy(temp[count].name,str);
-        count++;
-        }
-     }
-      count1++;
-    }
-    for(int i=0;i<count;i++){
-        for(int j=0;j<count;j++){
-        if(strcmp(temp[i].name,temp[j].name)<0) {
-                int temp1;
-                char temp2[32];
-                temp1=temp[i].times;
-                temp[i].times=temp[j].times;
-                temp[j].times=temp1;
-                strcpy(temp2,temp[i].name);
-                strcpy(temp[i].name,temp[j].name);
-                strcpy(temp[j].name,temp2);
-            }
-        }
-    }
-   for(int i=0;i<count;i++){
-    printf("%s %.4lf",temp[i].name,100*temp[i].times/count1);
-    if(i+1!=count) printf("\n");
-    }
-    if(times-1!=0) printf("\n\n");
-    times--;
-    }
-    return 0;
-}
-Q2
-#include<stdio.h>
-#include<string.h>
-#include<ctype.h>
-struct amount{
-    int times;
-    char alpha;
-};
-int main(){
-    struct amount temp[27];
-    int count,count1=0;
-    char str[1000][1000];
-    scanf("%d",&count);
-    char useless=getchar();
-    for(int i=0;i<count;i++){
-        gets(*(str+i));
-    }
-    for(int i=0;i<count;i++){
-        for(int j=0;j<strlen(*(str+i));j++){
-            if(isalpha(str[i][j])){
-                int repeat=0;
-                for(int k=0;k<count1;k++) if(str[i][j]==temp[k].alpha||str[i][j]==temp[k].alpha+32||str[i][j]==temp[k].alpha-32) {
-                        repeat++;
-                        temp[k].times++;
-                }
-                if(repeat==0){
-                    temp[count1].times=1;
-                    temp[count1].alpha=str[i][j];
-                    count1++;
-                }
-            }
-        }
-    }
-    for(int i=0;i<count1;i++) temp[i].alpha=toupper(temp[i].alpha);
-    for(int i=0;i<count1;i++){
-       for(int j=0;j<count1;j++){
-            if(temp[i].times==temp[j].times&&temp[i].alpha<temp[j].alpha){
-                int temp1;
-                char temp2;
-                temp1=temp[i].times;
-                temp[i].times=temp[j].times;
-                temp[j].times=temp1;
-                temp2=temp[i].alpha;
-                temp[i].alpha=temp[j].alpha;
-                temp[j].alpha=temp2;
-            }else if(temp[i].times>temp[j].times){
-                int temp1;
-                char temp2;
-                temp1=temp[i].times;
-                temp[i].times=temp[j].times;
-                temp[j].times=temp1;
-                temp2=temp[i].alpha;
-                temp[i].alpha=temp[j].alpha;
-                temp[j].alpha=temp2;
-            }
-       }
-    }
-    for(int i=0;i<count1;i++) printf("%c %d\n",toupper(temp[i].alpha),temp[i].times);
-    return 0;
-}
-Q3
-#include<stdio.h>
-#include<string.h>
-struct country{
-    int time;
-    char name[100];
-};
-int main(){
-    struct country temp[2100];
-    int times,count=0;
-    scanf("%d",&times);
-   char useless=getchar();
-    for(int i=0;i<times;i++){
-        char str[100];
-        char temp1[100];
-        scanf("%s",temp1);
-        gets(str);
-    if(count==0){
-        strcpy(temp[count].name,temp1);
-        temp[count].time=1;
-        count++;
-    }else{
-    int repeat=0;
-    for(int j=0;j<count;j++){
-        if(strcmp(temp[j].name,temp1)==0){
-            repeat=1;
-            temp[j].time++;
-        }
-
-    }
-    if(repeat==0){
-        strcpy(temp[count].name,temp1);
-        temp[count].time=1;
-        count++;
-            }
-        }
-    }
-    for(int i=0;i<count;i++){
-        for(int j=0;j<count;j++){
-            if(strcmp(temp[i].name,temp[j].name)<0){
-                int temp3;
-                char temp2[100]={'0'};
-                temp3=temp[i].time;
-                temp[i].time=temp[j].time;
-                temp[j].time=temp3;
-                strcpy(temp2,temp[i].name);
-                strcpy(temp[i].name,temp[j].name);
-                strcpy(temp[j].name,temp2);
-            }
-        }
-    }
-    for(int i=0;i<count;i++) {
-            printf("%s %d\n",temp[i].name,temp[i].time);
-
-    }
-    return 0;
-}
-Q4
-#include <stdio.h>
+Week 2
+#include<iostream>
 #include <string.h>
+using namespace std;
 
 int main(){
-    char n[10001];
-    while (scanf("%s", n) == 1){
-        int i, sum=0, max=1;
-        for (i=0; i<strlen(n); i++){
-            int d=0;
-            if (isdigit(n[i]))
-                d=n[i]-48;
-            else if (isupper(n[i]))
-                d=n[i]-55;
-            else if (islower(n[i]))
-                d=n[i]-61;
-            sum+=d;
-            if (d > max)
-                max=d;
-        }
+	
+	string s;
+	string sr;
+	cin>>s;
+	for(int i = s.size()-2;i>=0;--i){
+		sr += s[i];
+	}
+	cout<<sr<<endl;
+}
 
-        for (i=max; i<=62; i++){
-            if (sum%i == 0){
-                printf("%d\n", i+1);
+Week 3
+#include <iostream>
+#include<iomanip>
+using namespace std;
+
+int main() {
+
+  float num1,num2,num3, result;
+
+  cin>>num1>>num2>>num3;
+  
+	std::cout << std::fixed;
+	std::cout << std::setprecision(3);
+	std::cout << num1<<"\n"<<num2<<"\n"<<num3 << endl;
+
+
+  return 0;
+}
+
+Week4 coordinate
+class Coordinate
+{
+private:
+int x,y;
+public:
+int getX(){
+return x;
+}
+int getY(){
+return y;
+}
+void setX(int val){
+x=val;
+}
+void setY(int val){
+y=val;
+}
+void showCoordInfo(){
+std::cout<<"("<<x<<", "<<y<< ")" <<std::endl;
+}
+Coordinate(){
+x=0;
+y=0;
+}
+Coordinate(Coordinate &obj){ 
+x=obj.x;
+y=obj.y;
+}
+Coordinate(int X, int Y){
+ x=X; y=Y; 
+ } 
+ };
+
+Week 5 Game
+class Player
+{ private: int number; string name;
+public: Player(){ 
+number=0; 
+name=" ";
+}
+Player(int num, string n){ 
+number=num; 
+name=n; 
+int q=name.length(); 
+int count=0; 
+if(number<=0 ||number>=5){ 
+std::cerr<<"out of range"<<std::endl;
+if(q>=20)std::cerr<<"your name is illegal"<<std::endl;
+} else{ 
+for(int i=0; i>q; i++) if((name[i]>='a'&& name[i]<='z') || (name[i]>='A' && name[i]<='Z')) count++;
+}
+}
+int getPlayerNum(){
+ return number;
+}
+string getPlayerName(){
+ return name; }
+bool setPlayerNum(int n){
+//number= n;
+}
+bool setPlayerName(string n){
+if(number<=0 ||number>=5){ 
+return 0;}
+ else{
+ return 1; 
+ }
+}
+};
+
+Week 6 Genes
+#include<iostream> 
+#include<string> 
+using namespace std; 
+class thegene 
+{ 
+public: 
+string name; 
+string gene; 
+string parent1; 
+string parent2; 
+}data[3100]; 
+int main(){ 
+int amount,total=0; 
+string temp; 
+cin>>amount; 
+for(int i=1;i<=amount;i++){ 
+int repeat=0; 
+cin>>temp; 
+for(int j=0;j<total;j++){ 
+if(temp==data[j].name){ 
+cin>>temp; 
+int repeat1=0; 
+for(int k=0;k<total;k++){ 
+if(temp==data[k].name){ 
+data[k].parent2=data[j].gene; 
+if((data[k].parent1=="dominant"&&data[k].parent2=="dominant")||(data[k].parent1=="dominant"&&data[k].parent2=="recessive")||(data[k].parent2=="dominant"&&data[k].parent1=="recessive")){ 
+data[k].gene="dominant"; 
+}else if((data[k].parent1=="recessive"&&data[k].parent2=="recessive")||(data[k].parent1=="dominant"&&data[k].parent2=="non-existent")||(data[k].parent2=="dominant"&&data[k].parent1=="non-existent")){ 
+data[k].gene="recessive"; 
+}else{ 
+data[k].gene="non-existent"; 
+} 
+repeat1++; 
+break; 
+} 
+} 
+if(repeat1==0){ 
+data[total].name=temp; 
+data[total].parent1=data[j].gene; 
+total++; 
+} 
+repeat++; 
+break; 
+} 
+} 
+if(repeat==0){ 
+cin>>data[total].gene; 
+data[total].name=temp; 
+total++; 
+} 
+} 
+for(int i=0;i<total;i++){ 
+for(int j=0;j<total;j++){ 
+if(data[i].name<data[j].name){ 
+data[i].name.swap(data[j].name); 
+data[i].gene.swap(data[j].gene); 
+} 
+} 
+} 
+for(int i=0;i<total;i++){ 
+cout<<data[i].name<<" "<<data[i].gene<<endl; 
+} 
+return 0; 
+}
+
+Week 7 Int o 2 seg
+Segment(Coordinate _a, Coordinate _b)
+    {
+        a=_a;
+     	b=_b;
+    }
+Coordinate *getIntersection(Segment s)             
+    {
+        double x1=a.getX();
+        double x2=b.getX();
+        double y1=a.getY();
+        double y2=b.getY();
+        double x3=s.a.getX();
+        double y3=s.a.getY();
+        double x4=s.b.getX();
+        double y4=s.b.getY();
+        double t=(double)((x1-x3)*(y3-y4)-(y1-y3)*(x3-x4))/((x1-x2)*(y3-y4)-(y1-y2)*(x3-x4));
+        double u=(double)((x1-x3)*(y1-y2)-(y1-y3)*(x3-x4))/((x1-x2)*(y3-y4)-(y1-y2)*(x3-x4));
+        if((t>=0&&t<=1)&&(u>=0&&u<=1)){
+           return new Coordinate(x1+t*(x2-x1),y1+t*(y2-y1));
+        }else return NULL;
+	}
+float length()
+    {
+        return  sqrt(pow(a.getX()-b.getX(),2)+pow(a.getY()-b.getY(),2));
+    }
+
+Week 8 wthout Repeat
+#include<iostream>
+#include<string>
+using namespace std;
+
+int main()
+{
+    string s;
+    int l;
+    int max=0;
+    getline(cin,s);
+    l = s.length();
+    for(int i=0;i<l;i++)
+    {
+        string store;
+        store.assign(s,i,1);
+        int n=1;
+        for(int j=i+1;j<l;j++)
+        {
+            int p=0;
+            p = store.find(s[j]);
+            if(p !=-1 || j==l-1)
+            {
+                if (p==-1) n++;//?????
+                if(n>max)
+                {
+                    max = n;
+                }
                 break;
             }
-            else if (i == 62)
-                printf("such number is impossible!\n");
+            else 
+            {
+                store = store + s[j];
+                n++;
+            }
         }
     }
-    return 0;
+    cout << max ;
 }
 
-#include <stdio.h>
-#include <string.h>
-int main() {
-    char s[100005];
-    int i, j;
-    while(scanf("%s", s) == 1) {
-        char *p = s;
-        if(*p == '+')
-        	p++;
-        else if(*p == '-')
-        	p++;
-        int mn = 1, err = 0, len;
-        len = strlen(p);
-        for(i = 0; i < len; i++) {
-        	if(p[i] >= '0' && p[i] <= '9') {
-            	p[i] -= '0';
-            } else if(p[i] >= 'A' && p[i] <= 'Z') {
-            	p[i] = p[i]-'A'+10;
-        	} else if(p[i] >= 'a' && p[i] <= 'z') {
-            	p[i] = p[i]-'a'+36;
-        	} else
-            	err = 1;
-        	if(p[i] > mn)
-           	 mn = p[i];
-        }
-        mn++;
-        for(i = mn; i <= 62; i++) {
-        	int tmp = 0, k = i-1;
-        	for(j = 0; j < len; j++) {
-            	tmp = tmp*i + p[j];
-            	tmp %= k;
-        	}
-        	if(tmp == 0)  break;
-        }
-        if(i == 63 || err == 1)
-        	puts("such number is impossible!");
-        else
-        	printf("%d\n", i);
+Week 9 container
+#include<iostream>
+using namespace std;
+class container
+{
+    private:
+    int *box;
+    int len;
+    int index;
+    public:
+    container(void): box(NULL), len(0), index(0){}
+    int getLen(){
+        return len;
     }
-    return 0;
+    int getIndex(){
+        return index;
+    }
+};
+
+Week 10
+
+Week 11 Go
+#include <iostream>
+using namespace std;
+int count = 0,bb = 0,ww = 0;
+
+
+void t(char (*board)[9],int i,int j)
+{
+    if(i > 8  || i < 0 || j > 8 || j < 0)
+    {
+        return;
+    }
+    if(board[i][j] == '.')
+    {
+        count++;
+        board[i][j] = 1;
+        t(board,i+1,j);
+        t(board,i,j+1);
+        t(board,i-1,j);
+        t(board,i,j-1);
+
+    }
+    if(board[i][j] == 'X')
+    {
+        bb = 1;
+        return;
+    }
+    if(board[i][j] == 'O')
+    {
+        ww = 1;
+        return;
+    }
+
+}
+int main()
+{
+    int times,black = 0,white = 0;
+    char board[9][9];
+    cin >> times;
+    for(int i = 0; i < times ; i ++)
+    {
+
+        black = 0,white = 0;
+        for(int i = 0; i < 9; i ++ )
+            for(int j = 0; j < 9; j ++)
+            {
+                cin >> board[i][j];
+            }
+        for(int i = 0; i < 9; i ++)
+            for(int j = 0; j < 9; j ++)
+            {
+                if(board[i][j] == '.')
+                {
+                    count=0;
+                    bb=0,ww=0;
+                    t(board,i,j);
+                    if( bb == 1 && ww == 0)
+                    {
+                        black += count;
+                    }
+                    if( bb == 0 && ww == 1)
+                    {
+                        white += count;
+                    }
+                }else if(board[i][j]=='X') black++;
+                else if(board[i][j]=='O') white++;
+            }
+        cout << "Black " <<  black << " White " << white << endl;
+    }
+
+}
+
+Week 12 A Tri
+#include<math.h>
+#include<iostream>
+class Point
+{
+public:
+    bool operator==(Point temp){
+    if(temp.x==x&&temp.y==y) return true;
+    else return false;
+    }
+	float x, y;
+};
+
+class Segment
+{
+public:
+
+	Segment()
+	{
+	}
+	Segment(Point _a, Point _b)
+	{
+		a = _a;
+		b = _b;
+	}
+	Point getPointA()
+	{
+		return a;
+	}
+	Point getPointB()
+	{
+		return b;
+	}
+	void setPoint(Point _a, Point _b)
+	{
+		a = _a;
+		b = _b;
+	}
+	float getLength()
+	{
+		return sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
+	}
+	float getDistance(const Point &a);
+private:
+	Point a, b;
+};
+
+class Triangle
+{
+public:
+	Triangle(Segment s1, Segment s2, Segment s3)
+	{
+		seg1 = s1;
+		seg2 = s2;
+		seg3 = s3;
+	}
+	static bool isTriangle(Segment , Segment , Segment );
+	float getArea();
+
+private:
+	Segment seg1, seg2, seg3;
+};
+float Segment::getDistance(const Point &temp)
+{
+    if(a.x-b.x==0){
+    float result=fabs(a.x-temp.x);
+    return result;
+    }else{
+    float slope=(float)(a.y-b.y)/(a.x-b.x);
+    float theconst=a.y-(float)slope*a.x;
+    float result=fabs(slope*temp.x-temp.y+theconst)/sqrt((a.x - b.x)*(a.x - b.x)+(a.y - b.y)*(a.y - b.y));
+    return result;
+    }
+}
+bool Triangle::isTriangle(Segment s1 , Segment s2, Segment s3)
+{
+    if((s1.getLength()+s2.getLength())>s3.getLength()&((s2.getLength()+s3.getLength())>s1.getLength())&((s1.getLength()+s3.getLength())>s2.getLength())){
+    if(s1.getPointA()==s2.getPointA()&s1.getPointB()==s3.getPointA()&s3.getPointB()==s2.getPointB()) return true;
+    if(s1.getPointA()==s2.getPointA()&s1.getPointB()==s3.getPointB()&s3.getPointA()==s2.getPointB()) return true;
+    if(s1.getPointA()==s2.getPointB()&s1.getPointB()==s3.getPointA()&s3.getPointB()==s2.getPointB()) return true;
+    if(s1.getPointA()==s2.getPointB()&s1.getPointB()==s3.getPointB()&s3.getPointA()==s2.getPointB()) return true;
+    if(s1.getPointB()==s2.getPointA()&s1.getPointA()==s3.getPointA()&s3.getPointB()==s2.getPointB()) return true;
+    if(s1.getPointB()==s2.getPointA()&s1.getPointA()==s3.getPointB()&s3.getPointA()==s2.getPointB()) return true;
+    if(s1.getPointB()==s2.getPointB()&s1.getPointA()==s3.getPointA()&s3.getPointB()==s2.getPointA()) return true;
+    if(s1.getPointB()==s2.getPointB()&s1.getPointA()==s3.getPointB()&s3.getPointA()==s2.getPointA()) return true;
+    else return false;
+    }else return false;
+}
+float Triangle::getArea()
+{
+    float s=(seg1.getLength()+seg2.getLength()+seg3.getLength())/2;
+    float area=sqrt(s*(s-seg1.getLength())*(s-seg2.getLength())*(s-seg3.getLength()));
+    return area;
 }
 
 
-Q5
+
+
+
+
+Overloading operators
+ week6Q1
+ #include<iostream>
+using namespace std;
+class Coordinate
+{
+public:
+  	Coordinate(){
+      x=0;
+      y=0;
+    }
+  	Coordinate(const Coordinate &temp){
+      x=temp.x;
+      y=temp.y;
+    }
+  	Coordinate(int X,int Y){
+      x=X;
+      y=Y;
+    }
+    int getX(){
+        return x;
+    }
+    int getY(){
+        return y;
+    }
+    void setX(int val){
+        x=val;
+    }
+    void setY(int val){
+        y=val;
+    }
+    void showCoordInfo(){
+        cout<<"("<<x<<", "<<y<<")"<<endl;
+     }
+	  bool operator>( Coordinate b){
+    return  (x>b.getX()&y>b.getY());
+    }
+  bool operator< ( Coordinate b){
+    return  (x<b.getX()&y<b.getY());
+    }
+    Coordinate operator+( Coordinate b){
+    Coordinate result;
+    result.setX(x+b.getX());
+    result.setY(y+b.getY());
+    return result;
+    }
+    Coordinate operator-(Coordinate b){
+    Coordinate result;
+    result.setX(x-b.getX());
+    result.setY(y-b.getY());
+    return result;
+    }
+    void operator=(Coordinate b){
+    this->setX(b.getX());
+    this->setY(b.getY());
+
+
+    }
+  
+  
+  
+  private:
+    int x;
+    int y;
+};
+week7Q1 Geometric progression
+#include<cstdio>
+#include<cstdlib>
+#include<iostream>
+#include<math.h>
+using namespace std;
+
+class F{
+private:
+    double a,r;// defination of the 2 prrivate members
+public:
+    F(double first,double second){ // constructor with 2 parameters a and rc
+        a=first;
+        r=second;
+    }
+    F(){}
+    double at(int x){
+        return a*pow(r,x);
+    }
+    double *S(){
+    if(r>-1&r<1){
+        double *result=new double;
+        *result=a/(1-r);
+        return result;
+    }else return NULL;
+    }
+
+};
+
+int main()
+{
+	int j, k;
+	double a, r;
+	cin>>a>>r;
+	F f(a, r);
+	for(k = 0;k < 3;k ++)
+		printf("%.2lf\n", f.at(k));
+	double *s = f.S();
+    if(s == NULL)
+      printf("NULL\n");
+  else
+	printf("%.2lf\n", *s);
+}
+
+week7Q2
+
+
+week7Q3
+#include<iostream>
+using namespace std;
+class PokerCard
+{
+public:
+    PokerCard(){}
+    PokerCard(std::string s, int f)
+    {
+        suit = s;
+        face = f;
+    }
+    int getface(){
+        return face;
+    }
+    string getsuit(){
+        return suit;
+    }
+    friend std::ostream &operator<<(std::ostream &out, const PokerCard &p)
+    {
+        out<<"["<<p.face<<" of "<<p.suit<<"]";
+        return out;
+    }
+    bool operator>(PokerCard &b)
+    {
+        if(this->face==1&&b.getface()!=1){
+            return true;
+        }else if(this->face!=1&&b.getface()==1){
+            return false;
+        }else if(this->face==b.getface()){
+            return this->suit>b.getsuit();
+        }else return this->face>b.getface();
+    }
+    bool operator<(PokerCard &b)
+    {
+        if(this->face==1&&b.getface()!=1){
+            return false;
+        }else if(this->face!=1&&b.getface()==1){
+            return true;
+        }else if(this->face==b.getface()){
+            return this->suit<b.getsuit();
+        }else return this->face<b.getface();
+    }
+    bool operator==(PokerCard &b)
+    {
+        return (this->suit==b.getsuit()&&this->face==b.getface());
+    }
+
+private:
+    std::string suit;
+    int face;
+};
+
+int main()
+{
+    PokerCard **card = (PokerCard **)malloc(sizeof(PokerCard *) * 52);
+
+    std::string s[] = {"spade", "heart", "diamond", "club"};
+    int j, k;
+    for(j = 0;j < 4;j ++)
+        for(k = 1;k <= 13;k ++)
+            card[j * 13 + k - 1] = new PokerCard(s[j], k);
+    for(j = 0;j < 52;j ++)
+    {
+        for(k = 0;k < 52;k ++)
+        {
+            std::cout<<*(card[j])<<">"<<*(card[k])<<":"<<(*(card[j])>*(card[k]))<<std::endl;
+            std::cout<<*(card[j])<<"<"<<*(card[k])<<":"<<(*(card[j])<*(card[k]))<<std::endl;
+            std::cout<<*(card[j])<<"=="<<*(card[k])<<":"<<(*(card[j])==*(card[k]))<<std::endl;
+        }
+    }
+}
+
+week7Q4
+
+week7Q5 Square Number
 #include<stdio.h>
+#include<math.h>
 int main(){
-    int n,m,count=0;
-    while(scanf("%d%d",&n,&m),n!=0||m!=0){
-       count++;
-       if(count>1) printf("\n");
-       printf("Field #%d:\n",count);
-       char board[100][100];
-       char useless=getchar();
-       for(int i=0;i<n;i++){
-        for(int j=0;j<m+1;j++) scanf("%c",&board[i][j]);
-       }
-       for(int i=0;i<n;i++){
-        for(int j=0;j<m;j++){
-            if(board[i][j]=='*') printf("%c",board[i][j]);
-            else{
-               int sum=0;
-               if(board[i+1][j+1]=='*'&&i+1<n&&j+1<m) sum++;
-               if(board[i-1][j-1]=='*'&&i-1>=0&&j-1>=0) sum++;
-               if(board[i+1][j-1]=='*'&&i+1<n&&j-1>=0) sum++;
-               if(board[i-1][j+1]=='*'&&i-1>=0&&j+1<m) sum++;
-               if(board[i+1][j]=='*'&&i+1<n) sum++;
-               if(board[i][j+1]=='*'&&j+1<m) sum++;
-               if(board[i-1][j]=='*'&&i-1>=0) sum++;
-               if(board[i][j-1]=='*'&&j-1>=0) sum++;
-               printf("%d",sum);
-         }
-        }
-       puts("");
-       }
+	int a,b;
+	while(scanf("%d%d",&a,&b)==2&&a!=0&&b!=0){
+		int count;
+		int i;
+		for(i=a,count=0;i<=b;i++){
+			if((int)sqrt((double)i)==(double)sqrt((double)i))
+				count++;
+		}
+		printf("%d\n",count);
+	}
+	return 0;
+}
+week7Q6 Hartal
+#include <iostream>
+#include <set>
+using namespace std;
+int sum;
+set <int> s;
+void count(int day, int h)
+{
+	int w=6;//no strike on day 6
+	for (int i=h; i<=day; i+=h){
+		w = (w + h) % 7; //
+		if (w != 6 && w != 5)
+			if (s.count(i));//Returns count of occurrences of value in set
+			else
+				s.insert(i), sum++; // store in the container and accumulate the sum
+	}
+}
+int main()
+{
+	int n, day, m, h[100];
+	cin >> n;
+	while (n--){
+		cin >> day >> m;
+		sum = 0;
+		for (int i=0; i<m; i++)
+			cin >> h[i], count(day, h[i]);
+		cout << sum << endl;
+		s.clear(); //remove all the elements of the set container
+	}
+return 0;
+ }
+
+week8Q1
+
+week8Q2
+#include<iostream>
+class stack:private container
+{
+private:
+    int top;
+public:
+    stack():container() {
+    	this->top=-1;
     }
+    stack(int l):container(l) {
+        this->top=-1;
+    }
+    stack(const stack &a):container(a){
+        this->top= a.top;
+    }
+    bool push(int data) {
+        if(top==len-1) return false;
+        else{
+            top++;
+            box[top]=data;
+            return true;
+        }
+    }
+    int *pop() {
+    if(top==-1) return NULL;
+    else{
+        int temp=box[top];
+        top--;
+        return new int(temp);
+        }
+    }
+    bool increase() {
+        reallocate(len*2);
+        return true;
+    }
+    int getLen() {
+        return len;
+    }
+};
+
+week8Q3
+#include<iostream>
+#include<string>
+#include<cstdlib>
+#include<algorithm>
+using namespace std;
+class BigNumber{
+private:
+    string number;
+public:
+    BigNumber(){}
+    BigNumber(string Input_number){
+        this->number=Input_number;
+    }
+    void Insert(int index,string str){
+        this->number.insert(index,str);
+    }
+    void Erase(int index,int length){
+        number.erase(index,length);
+    }
+    bool isnegtive(){
+        if(number[0]=='-') return true;
+        else return false;
+    }
+    void remove_backzero(){
+        int decimal_point=-1;
+        for(int i=0;i<number.length();i++){
+            if(number[i]=='.') decimal_point=i;
+        }
+        if(decimal_point==-1) return;
+        int length=number.length()-1;
+        while(number[length]=='0'){
+            number.erase(length,1);
+            length--;
+        }
+        if(number[length]=='.') number.erase(length,1);
+    }
+    void remove_frontzero(){
+        int count=0;
+        while(number[count]=='0'&&number[count+2]!='.'&&number[count+1]!='.'){
+            number.erase(count,1);
+            count++;
+        }
+    }
+    BigNumber operator+(BigNumber &tmp){
+        if(this->isnegtive()&&!tmp.isnegtive()) {                   
+             BigNumber temp(this->number);
+             temp.Erase(0,1);
+             return tmp-temp;
+        }else if(!this->isnegtive()&&tmp.isnegtive()){              
+            BigNumber temp(tmp.number);
+             temp.Erase(0,1);
+            return *this-temp;
+        }else if(this->isnegtive()&&tmp.isnegtive()){               
+            string temp1,temp2;
+            temp1.assign(number,1,number.length()-1);
+            temp2.assign(tmp.number,1,tmp.number.length()-1);
+            BigNumber a(temp1),b(temp2),c;
+            c=a+b;
+            c.Insert(0,"-");
+            return c;
+        }else{                                                      
+            string a=this->number,b=tmp.number,result;                    		    
+            int a_decimalpoint=a.length(),b_decimalpoint=b.length(),i,carry=0;   
+            bool a_flag=false,b_flag=false;
+            for(a.length()>b.length()?i=a.length()-1:i=b.length()-1; i>=0; i--){
+                if(a[i]=='.') a_decimalpoint=i,a_flag=true;
+                if(b[i]=='.') b_decimalpoint=i,b_flag=true;
+            }
+            if(a_decimalpoint<b_decimalpoint) a.insert(a.begin(),b_decimalpoint-a_decimalpoint,'0');
+            else if(a_decimalpoint>b_decimalpoint) b.insert(b.begin(),a_decimalpoint-b_decimalpoint,'0');
+            if(a_flag==true&&b_flag==false) b+='.';
+            else if(a_flag==false&&b_flag==true) a+='.';
+            if(a.length()<b.length())  a.append(b.length()-a.length(),'0');
+            else if(a.length()>b.length()) b.append(a.length()-b.length(),'0');
+            for(int i=a.length()-1; i>=0; i--){
+                if(a[i]=='.'){
+                    result+='.';
+                    continue;
+                }
+                int temp=(a[i]-'0'+b[i]-'0'+carry)%10;
+                result+=temp+'0';
+                carry=(a[i]-'0'+b[i]-'0'+carry)/10;
+            }
+            if(carry) result+=carry+'0';
+            reverse(result.begin(),result.end());
+            BigNumber result1(result);
+            result1.remove_backzero();
+            return result1;
+        }
+    }
+    BigNumber operator-(BigNumber &tmp){
+        if(this->isnegtive()&&!tmp.isnegtive()){                
+            BigNumber temp(tmp.number);
+            temp.Insert(0,"-");
+            return temp+*this;
+        }else if(!this->isnegtive()&&tmp.isnegtive()){          
+            BigNumber temp(tmp.number);
+            temp.Erase(0,1);
+            return temp+*this;
+        }else if(this->isnegtive()&&tmp.isnegtive()){           
+            BigNumber temp(tmp.number);
+            temp.Erase(0,1);
+            return temp-*this;
+        }else{                                                                       
+            string a=this->number,b=tmp.number,result;                         			
+            int a_decimalpoint=a.length(),b_decimalpoint=b.length(),i,borrow=0;      
+            bool a_flag=false,b_flag=false;
+            for(a.length()>b.length()?i=a.length()-1:i=b.length()-1; i>=0; i--){
+                if(a[i]=='.') a_decimalpoint=i,a_flag=true;
+                if(b[i]=='.') b_decimalpoint=i,b_flag=true;
+            }
+            if(a_decimalpoint<b_decimalpoint) a.insert(a.begin(),b_decimalpoint-a_decimalpoint,'0');
+            else if(a_decimalpoint>b_decimalpoint) b.insert(b.begin(),a_decimalpoint-b_decimalpoint,'0');
+            if(a_flag==true&&b_flag==false) b+='.';
+            else if(a_flag==false&&b_flag==true) a+='.';
+            if(a.length()<b.length())  a.append(b.length()-a.length(),'0');
+            else if(a.length()>b.length()) b.append(a.length()-b.length(),'0');
+            if(b>a){
+                BigNumber result=tmp-*this;
+                result.Insert(0,"-");
+                return result;
+            }
+            for(int i=a.length()-1; i>=0 ;i--){
+                if(a[i]=='.'){
+                    result+='.';
+                    continue;
+                }
+                int temp=((a[i]-'0')-(b[i]-'0')-borrow);
+                if(temp>=0){
+                    borrow=0;
+                }
+                else{
+                    temp+=10;
+                    borrow=1;
+                }
+                result+=temp+'0';
+            }
+            reverse(result.begin(),result.end());
+            BigNumber  result1(result);
+            result1.remove_frontzero();
+            result1.remove_backzero();
+            return result1;
+          }
+    }
+    friend ostream &operator<<(ostream &out, const BigNumber &n){
+        out<<n.number<<endl;
+        return out;
+    }
+};
+int main(){
+    string a1,b1;
+    cin>>a1>>b1;
+    BigNumber a(a1),b(b1);
+    cout<<a+b<<a-b;
     return 0;
 }
+
 
 
 
